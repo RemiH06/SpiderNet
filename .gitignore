@@ -1,0 +1,42 @@
+# Contexto de Claude y roadmap: locales (el repo es público)
+CLAUDE.md
+steps.md
+plan.md
+history.md
+
+# Sistema y editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# Secretos: nunca en el repo. Las plantillas sí se versionan (*.example)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+credentials.json
+secrets/
+
+# Configuración real de una red: solo se versiona su plantilla *.example
+*.local.*
+AdGuardHome.yaml
+wg*.conf
+!*.example
+
+# Salidas con datos de la red (IPs, dispositivos, dominios visitados)
+*.pcap
+*.pcapng
+*.log
+logs/
+reports/out/
+data/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
