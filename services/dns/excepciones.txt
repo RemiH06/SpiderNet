@@ -1,0 +1,13 @@
+! Excepciones genéricas (sintaxis de AdGuard: @@||dominio^ deja pasar el dominio).
+! Las líneas con ! no se aplican. Descomenta una solo cuando algo se rompa,
+! y deja en el comentario qué rompía: cada excepción quita bloqueo.
+!
+! Links de rastreo en correos (el botón del correo no abre nada):
+! @@||ct.sendgrid.net^
+! @@||list-manage.com^
+! @@||mandrillapp.com^
+!
+! Afiliados (links de tiendas desde blogs, cupones o comparadores):
+! @@||click.linksynergy.com^
+! @@||go.redirectingat.com^
+! @@||s.click.aliexpress.com^

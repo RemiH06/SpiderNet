@@ -1,0 +1,56 @@
+# Plantilla de AdGuard Home. install.sh la llena con el dns.env del sitio.
+# Lo que se cambie desde el panel web se pierde en el siguiente install.sh:
+# la fuente de verdad es este archivo.
+http:
+  # Solo loopback: el panel se publica a la tailnet con `tailscale serve`.
+  address: 127.0.0.1:${SPIDERNET_ADMIN_PORT}
+  session_ttl: 720h
+users:
+  - name: ${SPIDERNET_ADMIN_USER}
+    password: ${SPIDERNET_ADMIN_PASSWORD_HASH}
+auth_attempts: 5
+block_auth_min: 15
+language: es
+dns:
+  # IPv4 de la LAN y loopback, no 0.0.0.0: si la Pi tiene IPv6 pública, no
+  # queremos un resolvedor abierto hacia internet.
+  bind_hosts:
+    - 127.0.0.1
+    - ${SPIDERNET_LAN_IP}
+  port: 53
+  # Defensa extra: solo responde a redes privadas y a Tailscale.
+  allowed_clients:
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+  upstream_dns:
+    - https://dns.quad9.net/dns-query
+    - https://dns.mullvad.net/dns-query
+  upstream_mode: load_balance
+  bootstrap_dns:
+    - 9.9.9.9
+    - 149.112.112.112
+    - 194.242.2.2
+  enable_dnssec: true
+  cache_optimistic: true
+querylog:
+  enabled: true
+  # Una semana: alcanza para los reportes semanales sin acumular de más.
+  interval: 168h
+statistics:
+  enabled: true
+  interval: 168h
+filters:
+  - enabled: true
+    url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
+    name: AdGuard DNS filter
+    id: 1
+  - enabled: true
+    url: https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/multi.txt
+    name: HaGeZi Multi Normal
+    id: 2
+user_rules:
+${SPIDERNET_USER_RULES}
+schema_version: 34

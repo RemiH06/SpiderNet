@@ -22,6 +22,7 @@ credentials.json
 secrets/
 
 # Configuración real de una red: solo se versiona su plantilla *.example
+sites/
 *.local.*
 AdGuardHome.yaml
 wg*.conf

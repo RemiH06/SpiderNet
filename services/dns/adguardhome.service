@@ -1,0 +1,24 @@
+[Unit]
+Description=AdGuard Home (SpiderNet)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=adguardhome
+Group=adguardhome
+ExecStart=/opt/adguardhome/AdGuardHome --no-check-update -c /var/lib/adguardhome/AdGuardHome.yaml -w /var/lib/adguardhome
+# Si arranca antes de que la IP de la LAN exista, el bind falla: reintenta.
+Restart=always
+RestartSec=5
+# Sin root: solo el permiso de escuchar en el 53.
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/adguardhome
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+
+[Install]
+WantedBy=multi-user.target

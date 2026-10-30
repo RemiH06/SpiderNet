@@ -1,0 +1,4 @@
+! Excepciones propias de esta red, además de services/dns/excepciones.txt.
+! Una por línea, con un comentario de qué rompía. Ejemplo:
+! Smart TV del cuarto: la app de streaming no cargaba el catálogo.
+! @@||ejemplo-streaming.com^
